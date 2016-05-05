@@ -21,7 +21,7 @@ for node in $nodes;do
 #	i=`echo $(( $i + 1 ))`
 done
 
-# bygg kommando
+# 
 
 #def=""
 #line=""
