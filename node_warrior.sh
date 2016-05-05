@@ -1,4 +1,6 @@
 #!/bin/bash
+# Logs in to HP ILO-card and resets the system
+# Change user and password to fit you system
 
 expect << EOF
 
