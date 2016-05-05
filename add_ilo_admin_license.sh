@@ -1,12 +1,22 @@
 #!/bin/bash
+# Script for adding ILO Advanced License to ILO-card
+
+# Authentication to ILO card
+USERNAME="admin"
+PASSWORD="admin"
+
+# Add keys from license file
+KEY1=
+KEY2=
+KEY3=
+KEY4=
+KEY5=
 
 #hosts=`cat ipmi_hosts`
 
-hosts="ipmi-1-24 ipmi-1-25"
-
 for host in $hosts;do
- `curl -s --digest -u admin:admin "http://$host/lkey.html?Lkey1=3545L&Lkey2=M9PMZ&Lkey3=L2PNW&Lkey4=GHQR6&Lkey5=ST72N&Submit=Apply" >>/dev/null`
- `curl -s --digest -u admin:admin "http://$host/lkey.html?OKCANCEL=1&OK_BUTTON=Ok" >>/dev/null`
- `curl -s --digest -u admin:admin "http://$host/lkey.html?OKCANCEL=1&OK_BUTTON=Ok" >>/dev/null`
+ `curl -s --digest -u $USERNAME:$PASSWORD "http://$host/lkey.html?Lkey1=$KEY1&Lkey2=$KEY2&Lkey3=$KEY3&Lkey4=$KEY4&Lkey5=$KEY5&Submit=Apply" >>/dev/null`
+ `curl -s --digest -u $USERNAME:$PASSWORD "http://$host/lkey.html?OKCANCEL=1&OK_BUTTON=Ok" >>/dev/null`
+ `curl -s --digest -u $USERNAME:$PASSWORD "http://$host/lkey.html?OKCANCEL=1&OK_BUTTON=Ok" >>/dev/null`
 
 done
