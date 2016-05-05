@@ -5,7 +5,7 @@
 # maintainance list: <folder>/node_mgmt/nodes_under_maintainance
 
 # edit accordingly
-node_mgmt_dir="/home/runefr/node_mgmt"
+node_mgmt_dir="$HOME/node_mgmt"
 #
 node_reset_script="$node_mgmt_dir/node_warrior.sh"
 node_maint_file="$node_mgmt_dir/nodes_under_maintainance"
@@ -49,6 +49,8 @@ done
 # reset dead nodes
 reset_nodes=`cat $node_dead_file`
 for reset_node in reset_nodes;do
+	# Send E-mail to sysadmin about node reset
 	mail -s"Node compute-$reset_node will be restarted now, `date +%y%m%d-%R`" < $node_reset_text
+	# Do reset
 	`$node_reset_script $reset_node`
 done
