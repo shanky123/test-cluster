@@ -60,5 +60,5 @@ for node in $nodes;do
 done
 
 # create graphs
-`$MGMT_DIR/cluster_create_graph.sh` >/dev/null
+`$MGMT_DIR/cluster_create_graph_temp.sh` >/dev/null
 #echo "Graph finished"
