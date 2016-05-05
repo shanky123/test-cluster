@@ -12,17 +12,17 @@ nodes=`cat /etc/hosts|grep comp|awk '{print$3}'`
 for node in $nodes;do
 	# set default temp value
 	temp="0"
-	# rename to ilo
-	manager=`echo $node|cut -f 2,3 -d"-"`
+	# translate node-host to ilo-host
+	ilo_host=`echo $node|cut -f 2,3 -d"-"`
 	# get sensor data
-	`curl --user admin:admin --digest --connect-timeout 10 -f -m 15 -s -o /tmp/sensor.html http://manager-$manager/sensors.html`
+	`curl --user admin:admin --digest --connect-timeout 10 -f -m 15 -s -o /tmp/sensor.html http://ipmi-$ilo_host/sensors.html`
 	`elinks -dump -dump-width 400 -no-numbering -no-references /tmp/sensor.html > /tmp/sensor.tmp`
 	# check node type
-	type=`echo $manager|grep "0-"|wc -l`
+	type=`echo $ilo_host|grep "0-"|wc -l`
 	# check if temp sensor data is available
 	temp=`cat /tmp/sensor.tmp|grep "AMB"|grep "Unavailable"|wc -l`
 	if [ $type == 1 ]; then
-		# dl140
+		# HP Proliant dl140 G3
 		if [ $temp == 1 ]; then
 			# if not available then set default temp to 15 deg
 			temp="0"
@@ -35,7 +35,7 @@ for node in $nodes;do
 			fi
 		fi
 	else
-	        # dl160
+	        # HP Proliant dl160 G5
                 temp=`cat /tmp/sensor.tmp |grep "Rear Ambient"|cut -f 6 -d"|"|awk '{print$1}'`
 	fi
 	echo  $node $temp
