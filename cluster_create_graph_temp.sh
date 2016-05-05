@@ -7,7 +7,6 @@ rrd="/var/lib/rrd"
 # define location of images
 img="/var/www/html/ganglia/temp"
 
-# nodes=`cat /etc/hosts|grep c0|cut -f2`
 nodes=`cat /etc/hosts|grep comp|awk '{print$3}'`
 
 for node in $nodes;do
