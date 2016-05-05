@@ -6,6 +6,8 @@
 rrd="/var/lib/rrd"
 # define location of images
 img="/var/www/html/ganglia/temp"
+# define location of scripts
+MGMT_DIR="$HOME/bin/cluster_mgmt/"
 
 nodes=`cat /etc/hosts|grep comp|awk '{print$3}'`
 
@@ -58,5 +60,5 @@ for node in $nodes;do
 done
 
 # create graphs
-`$HOME/bin/graph_cluster.sh` >/dev/null
+`$MGMT_DIR/cluster_create_graph.sh` >/dev/null
 #echo "Graph finished"
