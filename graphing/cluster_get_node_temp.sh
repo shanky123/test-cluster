@@ -7,7 +7,7 @@ rrd="/var/lib/rrd"
 # define location of images
 img="/var/www/html/ganglia/temp"
 # define location of scripts
-MGMT_DIR="$HOME/bin/cluster_mgmt/"
+MGMT_DIR="$HOME/bin/graphing/"
 
 nodes=`cat /etc/hosts|grep comp|awk '{print$3}'`
 
